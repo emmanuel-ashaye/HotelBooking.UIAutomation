@@ -1,4 +1,4 @@
-FROM dotnet-core-test-runner AS build
+FROM emmanuelashaye/dotnet-core-test-runner AS build
 WORKDIR /src
 COPY ["HotelBooking.UITests/HotelBooking.UITests.csproj", "HotelBooking.UITests/"]
 COPY ["UIFramework/UIFramework.csproj", "UIFramework/"] 
