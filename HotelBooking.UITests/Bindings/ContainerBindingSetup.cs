@@ -1,5 +1,4 @@
 ﻿using BoDi;
-using HotelBooking.UITests.PageObjects;
 using Microsoft.Extensions.Configuration;
 using TechTalk.SpecFlow;
 using UIFramework.Dispatchers;
@@ -34,7 +33,6 @@ namespace HotelBooking.UITests.Bindings
             _container.RegisterTypeAs<UIWebDriver, ITestDriver>();
             _container.RegisterTypeAs<UIWebDispatcher, ITestFrameworkDispatcher>();
         }
-
 
         [AfterScenario]
         public void TesrDownContaienerBindings()

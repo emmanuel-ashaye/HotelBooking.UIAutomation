@@ -9,12 +9,12 @@ namespace HotelBooking.UITests.Features
     [Binding]
     [Scope(Feature = "AddHotelBooking")]
     [Scope(Feature = "DeleteHotelBooking")]
-    internal sealed class HotelBookingSteps
+    internal class HotelBookingSteps
     {
         private readonly BookingContext _bookingContext;
         private readonly HotelBookingPage _hotelBookingPage;
 
-        public HotelBookingSteps(BookingContext bookingContext, HotelBookingPage hotelBookingpage)
+        internal HotelBookingSteps(BookingContext bookingContext, HotelBookingPage hotelBookingpage)
         {
             _bookingContext = bookingContext;
             _hotelBookingPage = hotelBookingpage;

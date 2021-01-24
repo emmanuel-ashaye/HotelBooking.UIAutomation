@@ -1,6 +1,6 @@
 ﻿namespace HotelBooking.UITests.Models
 {
-    internal class Booking
+    public class Booking
     {
         public string FirstName { get; set; }
 

@@ -3,7 +3,7 @@ version: '3.4'
 services:
   selenium-runner:
     container_name: selenium-runner
-    image: selenium/standalone-firefox:3.141.59
+    image: selenium/standalone-chrome:3.141.59
     ports:
       - "4444:4444"
     shm_size: '2gb'

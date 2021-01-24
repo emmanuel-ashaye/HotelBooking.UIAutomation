@@ -4,7 +4,7 @@ using UIFramework.Locators;
 
 namespace HotelBooking.UITests.PageObjects
 {
-    internal class HotelBookingPage
+    public class HotelBookingPage
     {
 
         private readonly ITestFrameworkDispatcher _dispatcher;
@@ -17,21 +17,21 @@ namespace HotelBooking.UITests.PageObjects
             _bookings = bookingTable;
         }
 
-        public FindBy FirstName => Find.ById("firstname");
+        private FindBy FirstName => Find.ById("firstname");
 
-        public FindBy LastName => Find.ById("lastname");
+        private FindBy LastName => Find.ById("lastname");
 
-        public FindBy TotalPrice => Find.ById("totalprice");
+        private FindBy TotalPrice => Find.ById("totalprice");
 
-        public FindBy DepositPaid => Find.ById("depositpaid");
+        private FindBy DepositPaid => Find.ById("depositpaid");
 
-        public FindBy Checkin => Find.ById("checkin");
+        private FindBy Checkin => Find.ById("checkin");
 
-        public FindBy Checkout => Find.ById("checkout");
+        private FindBy Checkout => Find.ById("checkout");
 
-        public FindBy SaveButton => Find.ByXPath("//input[@type='button' and @value=' Save ']");
+        private FindBy SaveButton => Find.ByXPath("//input[@type='button' and @value=' Save ']");
 
-        public FindBy Title => Find.ByXPath("//div[contains(@class, 'jumbotron') and contains(h1, 'Hotel booking form')]");
+        private FindBy Title => Find.ByXPath("//div[contains(@class, 'jumbotron') and contains(h1, 'Hotel booking form')]");
 
         public void EnterBookingDetails(Booking bookindDetails)
         {
@@ -48,7 +48,7 @@ namespace HotelBooking.UITests.PageObjects
             _dispatcher.Click(SaveButton);
         }
 
-        internal void VerifyPageTitle()
+        public void VerifyPageTitle()
         {
             _dispatcher.WaitForElementToBeVisible(Title);
         }
@@ -58,12 +58,12 @@ namespace HotelBooking.UITests.PageObjects
             _bookings.DeleteRow(booking.FirstName, booking.LastName);
         }
 
-        internal void VerifyBookingAdded(Booking booking)
+        public void VerifyBookingAdded(Booking booking)
         {
             _bookings.VerifyRowIsAdded(booking.FirstName, booking.LastName);
         }
 
-        internal void VerifyBookingDeleted(Booking booking)
+        public void VerifyBookingDeleted(Booking booking)
         {
             _bookings.VerifyRowIsDeleted(booking.FirstName, booking.LastName);
         }

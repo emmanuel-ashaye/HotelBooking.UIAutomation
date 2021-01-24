@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using UIFramework.Dispatchers;
 using UIFramework.Locators;
 
 namespace HotelBooking.UITests.PageObjects
 {
-    internal class BookingTable
+    public class BookingTable
     {
 
         private readonly ITestFrameworkDispatcher _dispatcher;
@@ -15,7 +14,7 @@ namespace HotelBooking.UITests.PageObjects
             _dispatcher = dispatcher;
         }
 
-        public  void VerifyRowIsAdded(params string[] rowValues)
+        public void VerifyRowIsAdded(params string[] rowValues)
         {
             _dispatcher.WaitForElementToBeVisible(FindRow(rowValues));
         }
