@@ -25,10 +25,6 @@ In order to run the test without an IDE, docker and docker-compose will be requi
 
 `docker-compose down`
 
-<<<<<<< Updated upstream
 6. To load the report in a browser, navegate to TestResults folder in the repository and click on the dashboard.html file.
 
 `open TestResults/dashboard.html`
-=======
-6. To load the report in a browser, navegate to DockerResults folder in the repository and click on the dashboard.html file.
->>>>>>> Stashed changes
