@@ -25,5 +25,7 @@ namespace UIFramework.Infrastructure
         public static string ApplicationBaseUrl => _configuration["ApplicationBaseUrl"];
 
         public static string RemoteDriverUrl => _configuration["RemoteDriverUrl"];
+
+        public static string RemoteNode => _configuration["RemoteNode"];
     }
 }

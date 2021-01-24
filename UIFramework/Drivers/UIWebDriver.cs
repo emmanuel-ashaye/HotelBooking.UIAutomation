@@ -56,25 +56,28 @@ namespace UIFramework.Drivers
         public void OpenApplication(string applicationUrl)
         {
             var waitLimit = TimeSpan.FromSeconds(7);
+            DriverOptions options;
 
-            //var service = ChromeDriverService.CreateDefaultService("./");
-            var options = new ChromeOptions();
-            options.AddArguments("chrome.switches",
-                "--disable-notifications",
-                "--disable-extensions",
-                "--start-maximized",
-                "no-sandbox",
-                "test-type");
+            if (Configuration.RemoteNode == "Chrome")
+            {
+                options = new ChromeOptions();
+                ((ChromeOptions)options).AddArguments("chrome.switches",
+                    "--disable-notifications",
+                    "--disable-extensions",
+                    "--start-maximized",
+                    "no-sandbox",
+                    "test-type");
+            }
+            else
+            {
+                options = new FirefoxOptions
+                {
+                    Profile = new FirefoxProfileManager().GetProfile("selenium")
+                };
+                ((FirefoxOptions)options).SetPreference("dom.webnotifications.enabled", true);
+            }
 
             _driver = new RemoteWebDriver(new Uri(Configuration.RemoteDriverUrl), options.ToCapabilities(), waitLimit);
-
-            /*
-            var options = new FirefoxOptions { Profile = new FirefoxProfileManager().GetProfile("selenium") };
-            options.SetPreference("dom.webnotifications.enabled", true);
-            _driver = new RemoteWebDriver(new Uri(Configuration.RemoteDriverUrl), options.ToCapabilities(), waitLimit);
-            _driver.Manage().Window.Maximize();
-            */
-
             _driver.Manage().Timeouts().ImplicitWait = waitLimit;
             _driver.Manage().Timeouts().PageLoad = waitLimit;
             _driver.Navigate().GoToUrl(applicationUrl);
