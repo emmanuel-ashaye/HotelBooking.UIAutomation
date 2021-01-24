@@ -8,11 +8,8 @@ using UIFramework.Drivers;
 namespace HotelBooking.UITests.Bindings
 {
     [Binding]
-    public class ContainerSetupBindings
+    internal class ContainerSetupBindings
     {
-
-        private string _baseUrl;
-
         private readonly IConfiguration _configuration;
 
         private readonly IObjectContainer _container;
@@ -34,16 +31,8 @@ namespace HotelBooking.UITests.Bindings
         [BeforeScenario]
         public void SetupContaienerBindings()
         {
-            _baseUrl = _configuration["ApplicationBaseUrl"];
-
-            ITestDriver _driver = new UIWebDriver(_baseUrl);
-            _container.RegisterInstanceAs(_driver);
-
-            ITestFrameworkDispatcher _dispatcher = new UIWebDispatcher(_driver as UIWebDriver);
-            _container.RegisterInstanceAs(_dispatcher);
-
-            HotelBookingPage hotelBookingPage = new HotelBookingPage(_dispatcher);
-            _container.RegisterInstanceAs(hotelBookingPage);
+            _container.RegisterTypeAs<UIWebDriver, ITestDriver>();
+            _container.RegisterTypeAs<UIWebDispatcher, ITestFrameworkDispatcher>();
         }
 
 

@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
+using UIFramework.Infrastructure;
 
 namespace UIFramework.Drivers
 {
@@ -23,9 +24,8 @@ namespace UIFramework.Drivers
         /// The ui web driver constructor
         /// </summary>
         /// <param name="application">The executing application.</param>
-        public UIWebDriver(string applicationUrl)
+        public UIWebDriver()
         {
-            _applicationUrl = applicationUrl;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace UIFramework.Drivers
             get
             {
                 if (_driver == null)
-                    OpenApplication(_applicationUrl);
+                    OpenApplication(Configuration.ApplicationBaseUrl);
                 return _driver;
             }
         }
@@ -55,7 +55,7 @@ namespace UIFramework.Drivers
         /// </summary>
         public void OpenApplication(string applicationUrl)
         {
-            var timeout = TimeSpan.FromSeconds(7);
+            var waitLimit = TimeSpan.FromSeconds(7);
 
             //var service = ChromeDriverService.CreateDefaultService("./");
             var options = new ChromeOptions();
@@ -66,18 +66,17 @@ namespace UIFramework.Drivers
                 "no-sandbox",
                 "test-type");
 
-            _driver = new RemoteWebDriver(new Uri("http://selenium-runner:4444/wd/hub"), options.ToCapabilities(), timeout);
-            //_driver = new ChromeDriver(service, options, timeout);
-            
+            _driver = new RemoteWebDriver(new Uri(Configuration.RemoteDriverUrl), options.ToCapabilities(), waitLimit);
+
             /*
             var options = new FirefoxOptions { Profile = new FirefoxProfileManager().GetProfile("selenium") };
             options.SetPreference("dom.webnotifications.enabled", true);
-            _driver = new RemoteWebDriver(new Uri("http://selenium-runner:4444/wd/hub"), options.ToCapabilities(), timeout);
+            _driver = new RemoteWebDriver(new Uri(Configuration.RemoteDriverUrl), options.ToCapabilities(), waitLimit);
             _driver.Manage().Window.Maximize();
             */
 
-            _driver.Manage().Timeouts().ImplicitWait = timeout;
-            _driver.Manage().Timeouts().PageLoad = timeout;
+            _driver.Manage().Timeouts().ImplicitWait = waitLimit;
+            _driver.Manage().Timeouts().PageLoad = waitLimit;
             _driver.Navigate().GoToUrl(applicationUrl);
         }
     }

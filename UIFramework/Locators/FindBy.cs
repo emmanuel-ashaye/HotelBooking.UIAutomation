@@ -15,22 +15,32 @@ namespace UIFramework.Locators
         /// </summary>
         public string Locator { get; set; }
 
-        public static implicit operator By(FindBy instance)
+        public static implicit operator By(FindBy locator)
         {
-            if (instance != null)
+            if (locator != null)
             {
-                return instance.How switch
+                return locator.How switch
                 {
-                    How.Id => By.Id(instance.Locator),
-                    How.PartialId => By.XPath($".//*[contains(@id, '{instance.Locator}')]"),
-                    How.Css => By.CssSelector(instance.Locator),
-                    How.Class => By.ClassName(instance.Locator),
-                    How.XPath => By.XPath(instance.Locator),
+                    How.Id => By.Id(locator),
+                    How.PartialId => By.XPath($".//*[contains(@id, '{locator}')]"),
+                    How.Css => By.CssSelector(locator),
+                    How.Class => By.ClassName(locator),
+                    How.XPath => By.XPath(locator),
                     _ => throw new InvalidOperationException("what did you try to do???"),
                 };
             }
 
             return null;
+        }
+
+        public static implicit operator string(FindBy instance)
+        {
+            return instance.Locator;
+        }
+
+        public override string ToString()
+        {
+            return Locator?.ToString();
         }
     }
 }

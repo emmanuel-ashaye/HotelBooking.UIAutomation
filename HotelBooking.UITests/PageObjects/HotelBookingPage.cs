@@ -9,9 +9,12 @@ namespace HotelBooking.UITests.PageObjects
 
         private readonly ITestFrameworkDispatcher _dispatcher;
 
-        public HotelBookingPage(ITestFrameworkDispatcher dispatcher)
+        private readonly BookingTable _bookings;
+
+        public HotelBookingPage(ITestFrameworkDispatcher dispatcher, BookingTable bookingTable)
         {
             _dispatcher = dispatcher;
+            _bookings = bookingTable;
         }
 
         public FindBy FirstName => Find.ById("firstname");
@@ -45,24 +48,25 @@ namespace HotelBooking.UITests.PageObjects
             _dispatcher.Click(SaveButton);
         }
 
-        public void ClickDelete(Booking booking)
-        {
-            _dispatcher.Click(Table.DeleteButton(booking.FirstName, booking.LastName));
-        }
-
-        internal void VerifyBookingDeleted(Booking booking)
-        {
-            _dispatcher.WaitForNoElement(Table.DeleteButton(booking.FirstName, booking.LastName));
-        }
-
-        internal void VerifyBookingAdded(Booking booking)
-        {
-            _dispatcher.WaitForElementToBeVisible(Table.Row(booking.FirstName, booking.LastName));
-        }
-
         internal void VerifyPageTitle()
         {
             _dispatcher.WaitForElementToBeVisible(Title);
         }
+
+        public void ClickDelete(Booking booking)
+        {
+            _bookings.DeleteRow(booking.FirstName, booking.LastName);
+        }
+
+        internal void VerifyBookingAdded(Booking booking)
+        {
+            _bookings.VerifyRowIsAdded(booking.FirstName, booking.LastName);
+        }
+
+        internal void VerifyBookingDeleted(Booking booking)
+        {
+            _bookings.VerifyRowIsDeleted(booking.FirstName, booking.LastName);
+        }
+
     }
 }

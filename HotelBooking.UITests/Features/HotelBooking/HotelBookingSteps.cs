@@ -30,7 +30,6 @@ namespace HotelBooking.UITests.Features
         public void IEnterTheseDetails(Booking booking)
         {
             _hotelBookingPage.EnterBookingDetails(booking);
-            _bookingContext.Bookings.Add(booking);
         }
 
         [When(@"I click the save button")]
@@ -58,7 +57,6 @@ namespace HotelBooking.UITests.Features
         {
             var booking = _bookingContext.Bookings.FirstOrDefault();
             _hotelBookingPage.VerifyBookingAdded(booking);
-
         }
 
         [Then("my hotel booking is removed")]
