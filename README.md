@@ -15,11 +15,11 @@ In order to run the test without an IDE, docker and docker-compose will be requi
 
 3. Once all containrs are running, run this command to kick of the tesst run.
 
-`docker exec -it hotel-booking-runner dotnet test --logger:"nunit;LogFilePath=TestResults/HotelBookingTests.xml"`
+`docker-compose exec test-runner dotnet test --logger:"nunit;LogFilePath=TestResults/HotelBookingTests.xml"`
 
 4. On completion, this command will generate a friendly report.
 
-`docker exec hotel-booking-reporter sh CreateExtentReport.sh`
+`docker-compose exec test-runner sh CreateExtentReport.sh`
 
 5. Finally run this command to tear down the environment.
 

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
 
@@ -65,8 +66,15 @@ namespace UIFramework.Drivers
                 "no-sandbox",
                 "test-type");
 
-            _driver = new RemoteWebDriver(new Uri("http://selenium-runner:4444/wd/hub"), options);
+            _driver = new RemoteWebDriver(new Uri("http://selenium-runner:4444/wd/hub"), options.ToCapabilities(), timeout);
             //_driver = new ChromeDriver(service, options, timeout);
+            
+            /*
+            var options = new FirefoxOptions { Profile = new FirefoxProfileManager().GetProfile("selenium") };
+            options.SetPreference("dom.webnotifications.enabled", true);
+            _driver = new RemoteWebDriver(new Uri("http://selenium-runner:4444/wd/hub"), options.ToCapabilities(), timeout);
+            _driver.Manage().Window.Maximize();
+            */
 
             _driver.Manage().Timeouts().ImplicitWait = timeout;
             _driver.Manage().Timeouts().PageLoad = timeout;
