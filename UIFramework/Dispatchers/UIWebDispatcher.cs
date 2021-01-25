@@ -129,7 +129,7 @@ namespace UIFramework.Dispatchers
         /// <returns>The value of the attribute</returns>
         public string GetAttributeOfElement(FindBy findBy, string attribute, int index = 0)
         {
-            return this.Driver.FindElements(findBy)[index].GetAttribute(attribute);
+            return Driver.FindElements(findBy)[index].GetAttribute(attribute);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace UIFramework.Dispatchers
         /// <param name="findBy">The element on which to perfom the action.</param>
         public void WaitForElement(FindBy findBy)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(15))
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(7))
                 .Until(e => e.FindElements(findBy).Any());
         }
 
@@ -176,7 +176,7 @@ namespace UIFramework.Dispatchers
         /// <param name="findBy">The element on which to perfom the action.</param>
         public void WaitForElementToBeVisible(FindBy findBy)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(15))
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(7))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(findBy));
         }
 
@@ -186,25 +186,8 @@ namespace UIFramework.Dispatchers
         /// <param name="findBy">The element on which to perfom the action.</param>
         public void WaitForNoElement(FindBy findBy)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(15))
-                //.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(findBy));
-                
-                .Until(condition =>
-                {
-                    try
-                    {
-                        var elementToBeDisplayed = Driver.FindElements(findBy).FirstOrDefault();
-                        return elementToBeDisplayed.Displayed;
-                    }
-                    catch (StaleElementReferenceException)
-                    {
-                        return false;
-                    }
-                    catch (NoSuchElementException)
-                    {
-                        return false;
-                    }
-                });
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(7))
+                .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(findBy));
         }
 
         /// <summary>
@@ -214,7 +197,7 @@ namespace UIFramework.Dispatchers
         /// <param name="text">The text to expect.</param>
         public void WaitForElementText(FindBy findBy, string text)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(15))
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(7))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementLocated(findBy, text));
         }
 
@@ -225,7 +208,7 @@ namespace UIFramework.Dispatchers
         /// <param name="value">The value to expect.</param>
         public void WaitForElementValue(FindBy findBy, string value)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(15))
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(7))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementValue(findBy, value));
         }
 
@@ -235,7 +218,7 @@ namespace UIFramework.Dispatchers
         /// <param name="findBy">The element on which to perfom the action.</param>
         public void WaitForAnyValue(FindBy findBy)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(15))
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(7))
                 .Until(e => e.FindElement(findBy).GetAttribute("value").Length > 0);
         }
 
@@ -255,7 +238,7 @@ namespace UIFramework.Dispatchers
         /// <param name="url">url of the page</param>
         public void NavigateToUrl(string url)
         {
-            this.Driver.Navigate().GoToUrl(_testDriver._applicationUrl);
+            Driver.Navigate().GoToUrl(_testDriver._applicationUrl);
         }
     }
 }
