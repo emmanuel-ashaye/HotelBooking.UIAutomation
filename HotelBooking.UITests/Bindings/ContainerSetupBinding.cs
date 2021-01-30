@@ -7,13 +7,13 @@ using UIFramework.Drivers;
 namespace HotelBooking.UITests.Bindings
 {
     [Binding]
-    internal class ContainerSetupBindings
+    internal class ContainerSetupBinding
     {
         private readonly IConfiguration _configuration;
 
         private readonly IObjectContainer _container;
 
-        public ContainerSetupBindings(IObjectContainer container)
+        public ContainerSetupBinding(IObjectContainer container)
         {
             _container = container;
             _configuration = GetConfiguration();

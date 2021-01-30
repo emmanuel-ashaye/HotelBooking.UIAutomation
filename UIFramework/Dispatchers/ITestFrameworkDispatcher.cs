@@ -63,7 +63,6 @@ namespace UIFramework.Dispatchers
         /// <param name="path">The screenshot path parameter.</param>
         void TakeScreenShot(string title, string path);
 
-
         /// <summary>
         /// Get an attribute of an element
         /// </summary>
@@ -116,7 +115,6 @@ namespace UIFramework.Dispatchers
         /// <param name="findBy">The element to look for.</param>
         /// <returns></returns>
         int GetElementCount(FindBy findBy);
-
 
         /// <summary>
         /// Navigate to the page using page url

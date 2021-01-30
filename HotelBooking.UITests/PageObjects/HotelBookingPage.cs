@@ -6,7 +6,6 @@ namespace HotelBooking.UITests.PageObjects
 {
     public class HotelBookingPage
     {
-
         private readonly ITestFrameworkDispatcher _dispatcher;
 
         private readonly BookingTable _bookings;
